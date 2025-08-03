@@ -9,6 +9,7 @@ jobs:
   deploy:
     name: Deploy Node.js app to Elastic Beanstalk
     runs-on: ubuntu-latest
+    environment: aws-keys 
 
     steps:
       - name: Checkout source code
