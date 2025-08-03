@@ -1,6 +1,7 @@
 {
-  "name": "express-app",
+  "name": "node-express-eb-app",
   "version": "1.0.0",
+  "description": "Node.js app for Elastic Beanstalk",
   "main": "app.js",
   "scripts": {
     "start": "node app.js"
