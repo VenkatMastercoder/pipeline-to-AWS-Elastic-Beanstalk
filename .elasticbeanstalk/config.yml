@@ -1,0 +1,10 @@
+branch-defaults:
+  main:
+    environment: your-env-name
+    group_suffix: null
+global:
+  application_name: your-app-name
+  default_region: ap-south-1
+  profile: null
+  repository: null
+  workspace_type: Application
