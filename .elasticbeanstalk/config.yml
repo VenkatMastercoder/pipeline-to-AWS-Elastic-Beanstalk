@@ -1,9 +1,9 @@
 branch-defaults:
   main:
-    environment: your-env-name
+    environment: node-express-prod
     group_suffix: null
 global:
-  application_name: your-app-name
+  application_name: node-express
   default_region: ap-south-1
   profile: null
   repository: null
