@@ -33,7 +33,8 @@ jobs:
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: node-express
           environment_name: node-express-prod
-          version_label: "v-${{ github.run_number }}"
           region: ap-south-1
           deployment_package: app.zip
+          version_label: "v-${{ github.run_number }}-${{ github.sha }}"
           use_existing_version_if_available: true
+
