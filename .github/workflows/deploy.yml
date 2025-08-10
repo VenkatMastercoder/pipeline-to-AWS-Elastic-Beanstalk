@@ -1,5 +1,4 @@
 name: Deploy to Elastic Beanstalk
-
 on:
   push:
     branches: [ master ]
@@ -15,29 +14,23 @@ jobs:
           node-version: '18'
           cache: 'npm'
 
-      - name: Install deps
-        run: npm ci
-
-      - name: Test
-        run: npm test
+      - run: npm ci
+      - run: npm test
 
       - name: Create source bundle
         run: |
           zip -r deploy.zip . \
             -x ".git/*" ".github/*" "node_modules/*" "*.log" ".DS_Store"
 
-      - name: Configure AWS creds
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
-
       - name: Deploy to Elastic Beanstalk
-        uses: aws-actions/elastic-beanstalk-deploy@v1
+        uses: einaregilsson/beanstalk-deploy@v21
         with:
-          application-name: ${{ secrets.EB_APP_NAME }}
-          environment-name: ${{ secrets.EB_ENV_NAME }}
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           region: ${{ secrets.AWS_REGION }}
-          version-label: v-${{ github.run_number }}-${{ github.sha }}
-          deployment-package: deploy.zip
+          application_name: ${{ secrets.EB_APP_NAME }}
+          environment_name: ${{ secrets.EB_ENV_NAME }}
+          version_label: v-${{ github.run_number }}-${{ github.sha }}
+          deployment_package: deploy.zip
+          # optional if you want to reuse a version label:
+          # use_existing_version_if_available: true
